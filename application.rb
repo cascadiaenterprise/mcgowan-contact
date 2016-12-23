@@ -11,10 +11,10 @@ post '/send_email' do
   params = JSON.parse(request.body.read)
   if params[:key].eql?(ENV['SEND_KEY'])
     res = Pony.mail(
-      :from => params[:name] + "<" + params[:email] + ">",
+      :from => params['name'] + "<" + params['email'] + ">",
       :to => 'dantmcgowan@me.com',
-      :subject => "Subject: " + params[:subject],
-      :body => params[:message],
+      :subject => "Subject: " + params['subject'],
+      :body => params['message'],
       :via => :smtp,
       :via_options => {
         :address              => 'smtp.sendgrid.net',
@@ -32,7 +32,7 @@ post '/send_email' do
       { :message => 'failure_email' }.to_json
     end
   else
-    { :message => "#{params['message']} is unauthorized." }.to_json
+    { :message => "#{params['email']} is unauthorized." }.to_json
   end
 end
 

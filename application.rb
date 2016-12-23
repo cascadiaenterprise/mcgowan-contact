@@ -8,6 +8,7 @@ set :protection, false
 set :public_dir, Proc.new { File.join(root, "_site") }
 
 post '/send_email' do
+  params = JSON.parse(request.body.read)
   if params[:key].eql?(ENV['SEND_KEY'])
     res = Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",
@@ -31,7 +32,7 @@ post '/send_email' do
       { :message => 'failure_email' }.to_json
     end
   else
-    { :message => "#{JSON.parse(request.body.read)} is unauthorized." }.to_json
+    { :message => "#{params[:email]} is unauthorized." }.to_json
   end
 end
 

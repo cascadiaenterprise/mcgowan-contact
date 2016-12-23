@@ -32,7 +32,7 @@ post '/send_email' do
       { :message => 'failure_email' }.to_json
     end
   else
-    { :message => "#{params['email']} is unauthorized." }.to_json
+    { :message => "failure_unauthorized." }.to_json
   end
 end
 

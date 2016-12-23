@@ -10,7 +10,7 @@ set :public_dir, Proc.new { File.join(root, "_site") }
 
 post '/send_email' do
   params = JSON.parse(request.body.read)
-  if params['key'].eql?(ENV['SEND_KEY'])
+  if params['key'].to_s.eql?(ENV['SEND_KEY'].to_s)
     res = Pony.mail(
       :from => params['name'] + "<" + params['email'] + ">",
       :to => 'dantmcgowan@me.com',
@@ -33,7 +33,7 @@ post '/send_email' do
       { :message => 'failure_email' }.to_json
     end
   else
-    { :message => "failure_unauthorized." }.to_json
+    { :message => "failure_unauthorized" }.to_json
   end
 end
 

@@ -12,8 +12,6 @@ GEM
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
-    rack-recaptcha (0.6.6)
-      json
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -27,7 +25,6 @@ DEPENDENCIES
   json
   pony
   rack
-  rack-recaptcha
   sinatra
 
 RUBY VERSION

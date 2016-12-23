@@ -8,7 +8,7 @@ set :protection, false
 set :public_dir, Proc.new { File.join(root, "_site") }
 
 post '/send_email' do
-  if recaptcha_valid?
+  if params[:key].eql?(ENV['SEND_KEY'])
     res = Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",
       :to => 'YOUR_EMAIL_ADDRESS',
@@ -31,7 +31,7 @@ post '/send_email' do
       { :message => 'failure_email' }.to_json
     end
   else
-    { :message => 'failure_captcha' }.to_json
+    { :message => 'failure_unauthorized' }.to_json
   end
 end
 

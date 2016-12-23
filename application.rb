@@ -1,7 +1,8 @@
 before do
   content_type :json
   headers 'Access-Control-Allow-Origin' => '*',
-          'Access-Control-Allow-Methods' => ['POST']
+          'Access-Control-Allow-Methods' => ['POST'],
+          'Access-Control-Allow-Headers' => ['Content-Type, Accept']
 end
 
 set :protection, false

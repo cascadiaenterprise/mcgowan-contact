@@ -8,7 +8,7 @@ set :protection, false
 set :public_dir, Proc.new { File.join(root, "_site") }
 
 post '/send_email' do
-  params = (JSON.parse(request.body.read)).to_json
+  params = JSON.parse(request.body.read)
   if params[:key].eql?(ENV['SEND_KEY'])
     res = Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",

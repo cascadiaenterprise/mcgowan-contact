@@ -13,7 +13,7 @@ post '/send_email' do
   if params['key'].to_s.eql?(ENV['SEND_KEY'].to_s)
     res = Pony.mail(
       :from => params['name'] + "<" + params['email'] + ">",
-      :to => 'dantmcgowan@me.com',
+      :to => params['home_email'],
       :subject => "Subject: " + params['subject'],
       :body => params['message'],
       :via => :smtp,
